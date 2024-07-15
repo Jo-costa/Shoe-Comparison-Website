@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" sizes="32x32" href="/img/shoe.png">
+    <script src="https://kit.fontawesome.com/b41a748a30.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <title>SoleFinder</title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <a href="http://localhost:3000/home">
+                <img src="/img/shoe.png" alt="" width="70px">
+                <h2>SoleFinder</h2>
+            </a>
+        </div>
+        <form action="/results">
+            <button class="search-icon" type="submit" >
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+                <input id="search" type="text" placeholder="Search" data-search name="search" required oninvalid="this.setCustomValidity('Enter search')"
+                oninput="this.setCustomValidity('')">
+        </form>
+
+        
+    </nav>

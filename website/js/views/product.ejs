@@ -1,0 +1,70 @@
+<%- include('layouts/header')%>
+
+<div class="product-container">
+    <!-- check if there is data to be displayed -->
+    <% if (data.length > 0) {%>
+
+        <!-- display product name -->
+    <h2><%=data[0].name%></h2>
+    <div class="product-content">
+
+        <!-- display product image -->
+        <img src="<%=data[0].img_url%>" alt="">
+
+        <div class="retailer-info"> 
+            <!-- display the product that was clicked on as the first container -->
+            <% for(let product of data) {%>
+                <div class="retailer">
+                    <div class="retailer-name">
+                        <p class="retailer-name-text"><%=product.retailer_name%></p>
+                    </div>
+                    
+                    <div class="shoe-img-product-comparison">
+                        <img src="<%=product.img_url%>" alt="">
+                    </div>
+    
+                        <p><span class="price">£<%= product.price%></span></p>
+                    <div class="goto">
+                        <a href="<%=product.retailer_url%>">Go to shop <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <%}%>
+
+                
+                <!-- iterate data2 that contains all the products that matched with the product in data -->
+                <% for(let product of data2) {%>
+                    <% if (data[0].id != data2[0].id) {%>
+                    <div class="retailer">
+                        <div class="retailer-name">
+                            <p><%=product.retailer_name%></p>
+                        </div>
+        
+                        <div class="shoe-img-product-comparison">
+                            <img src="<%=product.img_url%>" alt="">
+                        </div>
+        
+                        <p><span class="price">£<%= product.price%></span></p>
+                        <div class="goto">
+                            <a href="<%=product.retailer_url%>">Go to shop <i class="fa-solid fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <%}%>
+                    <% } %>
+        </div>
+        
+        <!-- display the details for the product that was clicked on -->
+        <div class="details">
+            <h2>Details</h2>
+            <div class="details-content">
+            <p class="details-title">Colour: </p>
+            <p><%=data[0].colour%></p>
+            <p class="details-title">Description: </p>
+            <p> <%=data[0].description%></p>
+        </div>
+    </div>
+</div>
+<% } %>
+
+</div>
+
+<%- include('layouts/footer')%>

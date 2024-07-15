@@ -1,0 +1,5 @@
+*.docx
+*.idea
+*.env
+*.mp4
+node_modules

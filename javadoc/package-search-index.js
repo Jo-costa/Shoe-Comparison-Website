@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.jocosta"},{"l":"com.jocosta.scrapers"},{"l":"com.jocosta.tables"},{"l":"com.jocosta.threads"}];updateSearchResults();

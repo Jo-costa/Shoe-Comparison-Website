@@ -1,0 +1,155 @@
+<%- include('layouts/header')%>
+
+<div class="content-container">
+    <h2 class="explore-page-title">Explore</h2>
+    <% if (data.length > 0) {%>
+
+    <div class="contents">
+
+
+        <% data.forEach((row) => { %>
+
+        <div class="content">
+            <a class="main-page-display-img" href="/product/<%= row.details_id%>">
+                <img src="<%= row.img_url %>" alt="">
+
+                <div class="shoe-info">
+                    <h2><%= row.name %></h2>
+                    <p><span class="pounds">£</span><%= row.price%></p>
+                </div>
+            </a>
+
+
+        </div>
+
+        <% }); %>
+
+
+        <% }else{ %>
+        <div class="no-results-section">
+            <h2 class="results-text">No Products Found...</h2>
+        </div>
+        <% } %>
+    </div>
+
+
+
+    <div class="pagination">
+        <% if(totalPages > 1) {%>
+        <ul class="pagination-options-container">
+
+            <%
+
+            const maxLinksDisplayed = 3;
+            const middleLink = Math.floor(maxLinksDisplayed / 2);
+            let startPage = currentPage - middleLink;
+            let endPage= currentPage + maxLinksDisplayed;
+            const total = totalPages - currentPage;
+
+            if(startPage < 1){
+                startPage = 1;
+                endPage = startPage + maxLinksDisplayed -1;
+            }
+
+            if(endPage > totalPages){
+                endPage = totalPages;
+                startPage = endPage - maxLinksDisplayed + 1;
+
+                if(startPage < 1){
+                    startPage = 1;
+                }
+            }
+
+        %>
+
+            <% if(currentPage > 1) {%>
+            <li class="pagination-container" id="link-container">
+                <a href="/explore?page=<%= currentPage -1%>&limit=<%=size%>"><i
+                        class="fa-solid fa-chevron-left"></i></a>
+            </li>
+            <% }%>
+
+            <% if(currentPage > 3) {%>
+            <li class="pagination-container" id="link-container">
+                <a href="/explore?page=<%= 1 %>&limit=<%=size%>">1</a>
+            </li>
+            <% }%>
+
+            <% if(currentPage > 3) {%>
+            <li class="pagination-container" id="link-container">
+                ...
+            </li>
+            <% }%>
+            <% for (let i = startPage; i <= endPage; i++){ %>
+
+            <% if(i !== currentPage ) { %>
+
+            <li class="pagination-container" id="link-container">
+                <a href="/explore?page=<%= i%>&limit=<%=size%>"><%= i %></a>
+            </li>
+            <% } else { %>
+            <li class="active" id="link-container">
+                <a href="/explore?page=<%= i%>&limit=<%=size%>"><%= i %></a>
+
+            </li>
+            <% }%>
+            <%}%>
+
+
+  
+               
+
+                <% if(total > 3) {%>
+            <li class="pagination-container" id="link-container">
+                ...
+            </li>
+            <% }%>
+
+
+
+            <% if(endPage <= totalPages && total > 3) {%>
+
+            <li class="pagination-container" id="link-container">
+                <a href="/explore?page=<%= totalPages %>&limit=<%=size%>"><%= totalPages %></a>
+            </li>
+            <% }%>
+
+            <% if(currentPage < totalPages) {%>
+            <li class="pagination-container" id="link-container">
+                <a href="/explore?page=<%= currentPage +1%>&limit=<%=size%>"><i
+                        class="fa-solid fa-chevron-right"></i></a>
+            </li>
+            <% }%>
+
+
+
+
+            <!-- <% for(let i = 1; i <= totalPages; i++){%>
+                    <% if(i !== currentPage) {%>
+                        <li  class="pagination-container" id="link-container">
+                            <a href="/explore?page=<%= i%>&limit=<%=size%>"><%= i %></a>
+                        </li>
+                    <% } %>
+            
+                    <% if(i === currentPage) {%>
+                        <li  class="active" id="link-container">
+                            <a href="/explore?page=<%= i%>&limit=<%=size%>"><%= i %></a>
+                            
+                        </li>
+                    <% } %>
+            
+            <% } %> 
+            end for loop -->
+
+
+
+        </ul> <!-- end if totalPages> 1 -->
+
+        <% } %>
+    </div>
+</div>
+
+
+
+
+<%- include('layouts/footer')%>

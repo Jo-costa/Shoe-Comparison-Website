@@ -1,0 +1,157 @@
+<%- include('layouts/header')%>
+
+<div class="content-container">
+    <!-- check if there are search results -->
+    <% if (data.length > 0) {%>
+        <!-- display search results text header -->
+    <h2 class="results-text">Results for "<%=searchInput%>"</h2>
+    <div class="contents">
+        
+
+        <!-- iterate through each product and display info on the page -->
+        <% data.forEach((row) => { %>
+            
+        <div class="content">
+            <!-- link to the respective product page -->
+            <a class="main-page-display-img" href="/product/<%= row.details_id%>">
+                <!-- product image -->
+                <img src="<%= row.img_url %>" alt="">
+            
+                <div class="shoe-info">
+                    <h2><%= row.name %></h2>
+                    <p><span class="pounds">£</span><%= row.price%></p>
+                </div>
+            </a>
+            
+
+        </div>
+        
+        <% }); %>
+        <!-- if no results were found -->
+        <% }else{ %>
+            
+            <div class="no-results-section">
+                <h2 class="results-text">No Results Found...</h2>
+            </div>
+            <% } %>
+    </div>
+
+    <!-- pagination links section -->
+       <div class="pagination">
+        <% if(totalPages > 1) {%>
+
+        <ul class="pagination-options-container">
+
+            <%
+
+            <!-- number of links to be displayed -->
+            const maxLinksDisplayed = 3;
+            <!-- calculate the middle link, used for findind the range of displayed links-->
+            const middleLink = Math.floor(maxLinksDisplayed / 2);
+            <!-- get the starting page -->
+            let startPage = currentPage - middleLink;
+            <!-- get the ending page -->
+            let endPage= currentPage + maxLinksDisplayed;
+            <!-- get the total pages after the current page -->
+            const total = totalPages - currentPage;
+
+            if(startPage < 1){
+                startPage = 1;
+                endPage = startPage + maxLinksDisplayed -1;
+            }
+
+            if(endPage > totalPages){
+                endPage = totalPages;
+                startPage = endPage - maxLinksDisplayed + 1;
+
+                if(startPage < 1){
+                    startPage = 1;
+                }
+            }
+
+        %>
+
+            <!-- link to the previous page -->
+            <% if(currentPage > 1) {%>
+            <li class="pagination-container" id="link-container">
+                <a href="/results?search=<%= searchInput %>&page=<%= currentPage -1%>&limit=<%=size%>"><i
+                        class="fa-solid fa-chevron-left"></i></a>
+            </li>
+            <% }%>
+
+            <!-- display link to the first page when the current page is greater than 3 -->
+            <% if(currentPage > 3) {%>
+            <li class="pagination-container" id="link-container">
+                <a href="/results?search=<%= searchInput %>&page=<%= 1 %>&limit=<%=size%>">1</a>
+            </li>
+            <% }%>
+
+            <!--display the ellipsis between the first and current link
+            if the current page is greater than 3  -->
+            <% if(currentPage > 3) {%>
+            <li class="pagination-container" id="link-container">
+                ...
+            </li>
+            <% }%>
+
+            <% for (let i = startPage; i <= endPage; i++){ %>
+
+            <!-- do not display active hover css 
+            if current link is not == current page -->
+            <% if(i !== currentPage ) { %>
+            <li class="pagination-container" id="link-container">
+                <a href="/results?search=<%= searchInput %>&page=<%= i%>&limit=<%=size%>"><%= i %></a>
+            </li>
+            <% } else { %>
+            <li class="active" id="link-container">
+                <a href="/results?search=<%= searchInput %>&page=<%= i%>&limit=<%=size%>"><%= i %></a>
+
+            </li>
+            <% }%>
+            <%}%>
+
+
+
+            <!-- display ellipsis -->
+                <% if(total > 3) {%>
+            <li class="pagination-container" id="link-container">
+                ...
+            </li>
+            <% }%>
+
+
+
+            <!-- link to the last page -->
+            <% if(endPage <= totalPages && total > 3) {%>
+
+            <li class="pagination-container" id="link-container">
+                <a href="/results?search=<%= searchInput %>&page=<%= totalPages %>&limit=<%=size%>"><%= totalPages %></a>
+                <!-- <a href="/explore?page=<%= totalPages %>&limit=<%=size%>"><%= totalPages %></a> -->
+            </li>
+            <% }%>
+
+            <!-- link to the next page -->
+            <% if(currentPage < totalPages) {%>
+            <li class="pagination-container" id="link-container">
+                <a href="/results?search=<%= searchInput %>&page=<%= currentPage +1%>&limit=<%=size%>">
+                <!-- <a href="/explore?page=<%= currentPage +1%>&limit=<%=size%>"> -->
+                    
+                    <i class="fa-solid fa-chevron-right"></i></a>
+            </li>
+            <% }%>
+
+
+
+        </ul> <!-- end if totalPages> 1 -->
+
+        <% } %>
+    </div>
+
+
+</div>
+
+
+
+
+
+<%- include('layouts/footer')%>
