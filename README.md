@@ -35,15 +35,22 @@ Shoe comparison website designed to help users make informed decisions when shop
    
    ![Screenshot 2024-07-15 115719](https://github.com/user-attachments/assets/cb2d6939-5ea4-43c5-9971-dcd23bd37171)
 
+
+
    Explore page
 
    
    ![Screenshot 2024-07-15 115746](https://github.com/user-attachments/assets/4db3553c-4dc9-44e7-9fe2-ee6e188aa0a5)
 
+
+
+
    Product page
 
    
    ![Screenshot 2024-07-15 115756](https://github.com/user-attachments/assets/475e0db5-b8ee-4ada-9e1a-ac6bc4e2ba07)
+
+
 
    Search results page
 
